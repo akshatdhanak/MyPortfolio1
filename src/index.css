@@ -45,18 +45,34 @@ h1,h2,h3,h4,h5,h6{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
   background-clip:text;
 }
 
-/* Apple-style glass card */
+/* Apple-style glass card with enhanced effects */
 .glass-card{
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(40px) saturate(180%);
   border:1px solid rgba(255,255,255,0.1);
   border-radius:24px;
   transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.glass-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+  transition:left 0.5s;
+}
+.glass-card:hover::before{
+  left:100%;
 }
 .glass-card:hover{
   background:rgba(255,255,255,0.08);
   border-color:rgba(255,255,255,0.2);
-  transform:translateY(-4px);
+  transform:translateY(-8px);
+  box-shadow:0 20px 60px rgba(59,130,246,0.3);
 }
 
 /* Apple-style button */
@@ -77,6 +93,7 @@ h1,h2,h3,h4,h5,h6{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
 .btn-primary:hover{
   background:#0077ed;
   transform:scale(1.02);
+  box-shadow:0 10px 30px rgba(0,113,227,0.4);
 }
 
 .btn-secondary{
@@ -96,17 +113,111 @@ h1,h2,h3,h4,h5,h6{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
 .btn-secondary:hover{
   border-color:#2997ff;
   background:rgba(41,151,255,0.1);
+  box-shadow:0 10px 30px rgba(41,151,255,0.2);
 }
 
-/* Remove all messy backgrounds */
-.bg-mesh,.grid-lines,.noise,.particle-field{display:none}
+/* Advanced animations */
+@keyframes gridMove{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(50px)}
+}
 
-/* Clean fade-in animation */
+@keyframes glitch-1{
+  0%,100%{transform:translate(0)}
+  20%{transform:translate(-2px,2px)}
+  40%{transform:translate(-2px,-2px)}
+  60%{transform:translate(2px,2px)}
+  80%{transform:translate(2px,-2px)}
+}
+
+@keyframes glitch-2{
+  0%,100%{transform:translate(0)}
+  20%{transform:translate(2px,-2px)}
+  40%{transform:translate(2px,2px)}
+  60%{transform:translate(-2px,-2px)}
+  80%{transform:translate(-2px,2px)}
+}
+
+.animate-glitch-1{
+  animation:glitch-1 3s infinite;
+  clip-path:polygon(0 0,100% 0,100% 45%,0 45%);
+}
+
+.animate-glitch-2{
+  animation:glitch-2 3s infinite;
+  clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);
+}
+
+/* Holographic effect */
+@keyframes holographic{
+  0%,100%{
+    background-position:0% 50%;
+  }
+  50%{
+    background-position:100% 50%;
+  }
+}
+
+.holographic{
+  background:linear-gradient(45deg,#3b82f6,#8b5cf6,#ec4899,#3b82f6);
+  background-size:300% 300%;
+  animation:holographic 5s ease infinite;
+}
+
+/* Particle float */
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-20px) rotate(5deg)}
+  66%{transform:translateY(10px) rotate(-5deg)}
+}
+
+.animate-float{
+  animation:float 6s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulseGlow{
+  0%,100%{
+    box-shadow:0 0 20px rgba(59,130,246,0.5),0 0 40px rgba(139,92,246,0.3);
+  }
+  50%{
+    box-shadow:0 0 40px rgba(59,130,246,0.8),0 0 80px rgba(139,92,246,0.5);
+  }
+}
+
+.animate-pulse-glow{
+  animation:pulseGlow 3s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer{
+  0%{background-position:-1000px 0}
+  100%{background-position:1000px 0}
+}
+
+.shimmer{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+  background-size:1000px 100%;
+  animation:shimmer 3s infinite;
+}
+
+/* Fade in up animation */
 @keyframes fadeInUp{
   from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
 }
 .fade-in{animation:fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards}
+
+/* Rotate 3D */
+@keyframes rotate3d{
+  0%{transform:rotateY(0deg) rotateX(0deg)}
+  100%{transform:rotateY(360deg) rotateX(360deg)}
+}
+
+.animate-rotate-3d{
+  animation:rotate3d 20s linear infinite;
+  transform-style:preserve-3d;
+}
 
 /* Apple-style focus */
 *:focus-visible{
@@ -118,4 +229,50 @@ h1,h2,h3,h4,h5,h6{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,
 /* Smooth transitions for everything */
 *{
   transition-timing-function:cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Tech grid background */
+.tech-grid{
+  background-image:
+    linear-gradient(rgba(59,130,246,0.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(59,130,246,0.1) 1px,transparent 1px);
+  background-size:50px 50px;
+  animation:gridMove 20s linear infinite;
+}
+
+/* Neon glow text */
+.neon-text{
+  text-shadow:
+    0 0 10px rgba(59,130,246,0.8),
+    0 0 20px rgba(59,130,246,0.6),
+    0 0 30px rgba(59,130,246,0.4),
+    0 0 40px rgba(139,92,246,0.3);
+}
+
+/* Video overlay */
+video{
+  object-fit:cover;
+  width:100%;
+  height:100%;
+}
+
+/* Gradient border animation */
+@keyframes borderRotate{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+
+.gradient-border{
+  position:relative;
+}
+
+.gradient-border::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  background:linear-gradient(45deg,#3b82f6,#8b5cf6,#ec4899,#3b82f6);
+  border-radius:inherit;
+  z-index:-1;
+  animation:borderRotate 3s linear infinite;
+  background-size:300% 300%;
 }
