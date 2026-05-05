@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:80px;
+}
+body{
+  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;
+  background:#000;
+  color:#f5f5f7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+h1,h2,h3,h4,h5,h6{font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Syne',sans-serif}
+
+/* Apple-style smooth scrollbar */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  transition:background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.3)}
+::selection{background:rgba(0,113,227,0.3);color:#fff}
+
+/* Apple-style section spacing */
+.sec{
+  position:relative;
+  padding:120px 24px;
+  max-width:1200px;
+  margin:0 auto;
+}
+@media(min-width:768px){.sec{padding:160px 48px}}
+
+/* Apple-style gradient text */
+.grad-text{
+  background:linear-gradient(90deg,#06f,#0af);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* Apple-style glass card */
+.glass-card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(40px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:24px;
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.glass-card:hover{
+  background:rgba(255,255,255,0.08);
+  border-color:rgba(255,255,255,0.2);
+  transform:translateY(-4px);
+}
+
+/* Apple-style button */
+.btn-primary{
+  background:#0071e3;
+  color:#fff;
+  padding:12px 24px;
+  border-radius:980px;
+  font-size:17px;
+  font-weight:400;
+  border:none;
+  cursor:pointer;
+  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-primary:hover{
+  background:#0077ed;
+  transform:scale(1.02);
+}
+
+.btn-secondary{
+  background:transparent;
+  color:#2997ff;
+  padding:12px 24px;
+  border-radius:980px;
+  font-size:17px;
+  font-weight:400;
+  border:1px solid rgba(41,151,255,0.3);
+  cursor:pointer;
+  transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-secondary:hover{
+  border-color:#2997ff;
+  background:rgba(41,151,255,0.1);
+}
+
+/* Remove all messy backgrounds */
+.bg-mesh,.grid-lines,.noise,.particle-field{display:none}
+
+/* Clean fade-in animation */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.fade-in{animation:fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards}
+
+/* Apple-style focus */
+*:focus-visible{
+  outline:2px solid #0071e3;
+  outline-offset:4px;
+  border-radius:4px;
+}
+
+/* Smooth transitions for everything */
+*{
+  transition-timing-function:cubic-bezier(0.4,0,0.2,1);
+}
