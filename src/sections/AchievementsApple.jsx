@@ -1,193 +1,348 @@
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
 
-const achievements = [
+const milestones = [
+  {
+    year: "2015",
+    title: "National Art Award",
+    org: "National Level Competition",
+    desc: "Won a national-level art award in 5th standard. Recognized for creativity and artistic excellence among participants from across the country.",
+    stats: [{ k: "Level", v: "National" }, { k: "Grade", v: "5th Std" }, { k: "Category", v: "Art" }],
+    icon: "🎨",
+    accent: "#a855f7",
+  },
   {
     year: "2023",
     title: "GUJCET Excellence",
-    organization: "Gujarat Common Entrance Test",
-    description: "Secured 107/120 marks with a perfect 40/40 in Mathematics. Achieved 99.16 percentile and earned admission to Dharmsinh Desai University for Computer Engineering.",
-    stats: { score: "107/120", percentile: "99.16%", maths: "40/40" }
+    org: "Gujarat Common Entrance Test",
+    desc: "Secured 107/120 marks with a perfect 40/40 in Mathematics. Achieved 99.16 percentile — top of the state.",
+    stats: [{ k: "Score", v: "107/120" }, { k: "Percentile", v: "99.16%" }, { k: "Maths", v: "40/40" }],
+    icon: "🏆",
+    accent: "#ff6b35",
   },
   {
     year: "2024",
     title: "Bhrigu Lake Trek",
-    organization: "First Himalayan Trek",
-    description: "Completed my first-ever trek to Bhrigu Lake at 15,000 feet altitude in the Himalayas. Conquered challenging terrain and extreme weather conditions.",
-    stats: { altitude: "15,000 ft", difficulty: "High", experience: "First trek" }
+    org: "First Himalayan Trek",
+    desc: "Completed my first-ever trek to Bhrigu Lake at 15,000 feet altitude in the Himalayas. Conquered challenging terrain and extreme weather.",
+    stats: [{ k: "Altitude", v: "15,000 ft" }, { k: "Difficulty", v: "High" }, { k: "Experience", v: "First Trek" }],
+    icon: "⛰️",
+    accent: "#3d9cf5",
   },
   {
-    year: "2024-2025",
+    year: "2024–25",
     title: "Fitness Transformation",
-    organization: "Personal Achievement",
-    description: "Lost 27 kg through consistent diet management and gym training. Transformed lifestyle with discipline and dedication over months of hard work.",
-    stats: { weight: "27 kg lost", method: "Diet + Gym", duration: "12+ months" }
+    org: "Personal Achievement",
+    desc: "Lost 27 kg through consistent diet management and gym training. Transformed lifestyle with discipline and dedication over 12+ months.",
+    stats: [{ k: "Lost", v: "27 kg" }, { k: "Method", v: "Diet + Gym" }, { k: "Duration", v: "12+ months" }],
+    icon: "💪",
+    accent: "#00d4ff",
   },
-  {
-    year: "2015",
-    title: "National Art Award",
-    organization: "National Level Competition",
-    description: "Won a national-level award for art in 5th standard. Recognized for creativity and artistic excellence among participants from across the country.",
-    stats: { level: "National", grade: "5th Standard", category: "Art" }
-  }
 ];
 
+/* ── Futuristic Race-Car SVG ── */
+function RaceCar({ progress }) {
+  return (
+    <motion.div style={{ y: progress }} className="relative z-20">
+      {/* Glow behind car */}
+      <div className="absolute inset-0 blur-xl opacity-60 scale-150" style={{ background: "radial-gradient(circle, #ff6b35 0%, transparent 70%)" }} />
+
+      <div className="rotate-90 relative">
+        <svg width="56" height="28" viewBox="0 0 56 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="relative z-10 drop-shadow-[0_0_12px_#ff6b35]">
+          {/* Body */}
+          <path d="M6 20 Q8 12 16 10 L34 8 Q44 7 50 12 L54 16 Q56 18 54 22 L6 22 Q4 22 6 20Z" fill="#1a1a2e" stroke="#ff6b35" strokeWidth="1.2"/>
+          {/* Cockpit */}
+          <path d="M20 10 Q24 4 30 4 L36 4 Q40 4 42 8 L20 10Z" fill="#ff6b35" opacity="0.9"/>
+          {/* Wheels */}
+          <circle cx="14" cy="22" r="5" fill="#0a0a1a" stroke="#ff9a3c" strokeWidth="1.5"/>
+          <circle cx="14" cy="22" r="2.5" fill="#ff6b35"/>
+          <circle cx="42" cy="22" r="5" fill="#0a0a1a" stroke="#ff9a3c" strokeWidth="1.5"/>
+          <circle cx="42" cy="22" r="2.5" fill="#ff6b35"/>
+          {/* Front wing */}
+          <path d="M50 14 L56 12 L56 16 L50 16Z" fill="#ff6b35"/>
+          {/* Rear wing */}
+          <path d="M6 12 L0 10 L0 16 L6 16Z" fill="#ff6b35"/>
+          {/* Exhaust glow */}
+          <path d="M4 18 L-4 16 L-8 18 L-4 20 L4 20Z" fill="url(#exhaust)" opacity="0.8"/>
+          <defs>
+            <linearGradient id="exhaust" x1="4" y1="18" x2="-8" y2="18">
+              <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.9"/>
+              <stop offset="60%" stopColor="#ff9a3c" stopOpacity="0.5"/>
+              <stop offset="100%" stopColor="#ff6b35" stopOpacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Speed lines */}
+        <motion.div
+          animate={{ opacity: [0.6, 0, 0.6] }}
+          transition={{ duration: 0.4, repeat: Infinity }}
+          className="absolute right-full top-1/2 -translate-y-1/2 flex flex-col gap-1 pr-1"
+        >
+          {[14, 10, 6].map((w, i) => (
+            <div key={i} className="h-[1px] bg-gradient-to-l from-accent-orange to-transparent" style={{ width: w }} />
+          ))}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Track Lane SVG ── */
+function TrackSVG({ totalHeight }) {
+  const W = 80;
+  return (
+    <svg
+      width={W}
+      height={totalHeight}
+      viewBox={`0 0 ${W} ${totalHeight}`}
+      fill="none"
+      className="absolute left-1/2 -translate-x-1/2 top-0"
+    >
+      {/* Outer track border — left */}
+      <line x1="12" y1="0" x2="12" y2={totalHeight} stroke="rgba(255,107,53,0.3)" strokeWidth="2" strokeDasharray="8 6" />
+      {/* Outer track border — right */}
+      <line x1={W - 12} y1="0" x2={W - 12} y2={totalHeight} stroke="rgba(255,107,53,0.3)" strokeWidth="2" strokeDasharray="8 6" />
+      {/* Center dashed line */}
+      <line x1={W / 2} y1="0" x2={W / 2} y2={totalHeight} stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="12 10" />
+      {/* Track fill */}
+      <rect x="12" y="0" width={W - 24} height={totalHeight} fill="rgba(255,107,53,0.02)" />
+
+      {/* Checkpoint lines at each milestone */}
+      {milestones.map((_, i) => {
+        const y = (i + 0.5) * (totalHeight / milestones.length);
+        return (
+          <g key={i}>
+            <line x1="12" y1={y} x2={W - 12} y2={y} stroke="rgba(255,107,53,0.25)" strokeWidth="1" />
+            <text x={W / 2} y={y - 6} textAnchor="middle" fontSize="7" fill="rgba(255,107,53,0.4)" fontFamily="Space Mono">
+              CP-{i + 1}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ── Single Milestone Card ── */
+function MilestoneCard({ item, index, totalCards }) {
+  const isLeft = index % 2 === 0;
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: isLeft ? -100 : 100, y: 30 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={`relative flex items-start gap-0 ${isLeft ? "flex-row" : "flex-row-reverse"} w-full`}
+    >
+      {/* Card */}
+      <div className={`w-[calc(50%-64px)] ${isLeft ? "mr-auto" : "ml-auto"}`}>
+        <motion.div
+          whileHover={{ y: -6, scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="fut-card group relative overflow-hidden cursor-default"
+        >
+          {/* Accent top bar */}
+          <div
+            className="h-[2px] w-full"
+            style={{ background: `linear-gradient(90deg, ${item.accent}, transparent)` }}
+          />
+          {/* Corner brackets */}
+          <div className="absolute top-0 left-0 w-4 h-4 border-t border-l" style={{ borderColor: `${item.accent}80` }} />
+          <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r" style={{ borderColor: `${item.accent}80` }} />
+
+          {/* Hover glow bg */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            style={{ background: `radial-gradient(ellipse at center, ${item.accent}06 0%, transparent 70%)` }}
+          />
+
+          <div className="fut-card-inner">
+            {/* Year + icon row */}
+            <div className="flex items-center justify-between mb-4">
+              <span
+                className="font-mono text-[10px] tracking-[0.2em] uppercase px-3 py-1 border"
+                style={{ color: item.accent, borderColor: `${item.accent}40`, background: `${item.accent}08` }}
+              >
+                {item.year}
+              </span>
+              <span className="text-2xl">{item.icon}</span>
+            </div>
+
+            <h3 className="font-display text-xl font-bold text-white mb-1 group-hover:text-accent-orange transition-colors duration-300">
+              {item.title}
+            </h3>
+            <p className="font-mono text-[11px] mb-4" style={{ color: item.accent }}>
+              {item.org}
+            </p>
+            <p className="text-sm text-zinc-500 leading-relaxed mb-5">{item.desc}</p>
+
+            {/* Stats */}
+            <div className="flex gap-4 pt-4 border-t border-white/[0.04]">
+              {item.stats.map((s) => (
+                <div key={s.k}>
+                  <p className="font-mono text-[9px] text-zinc-700 uppercase tracking-widest mb-0.5">{s.k}</p>
+                  <p className="font-mono text-xs text-zinc-300">{s.v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Center spacer — track is here */}
+      <div className="w-32 shrink-0" />
+    </motion.div>
+  );
+}
+
 export default function Achievements() {
-  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+
+  const CARD_HEIGHT = 240; // approx px per card
+  const TRACK_HEIGHT = milestones.length * CARD_HEIGHT + 120;
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
+    target: sectionRef,
+    offset: ["start 0.8", "end 0.3"],
   });
 
+  // Smooth the scroll
+  const smooth = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+
+  // Car travels from -28 (above first card) to trackHeight - 28 (below last)
+  const carY = useTransform(smooth, [0, 1], [-28, TRACK_HEIGHT - 56]);
+
   return (
-    <section id="achievements" ref={containerRef} className="sec bg-black relative overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl" />
-      
-      <div className="sec-inner relative z-10">
+    <section id="achievements" ref={sectionRef} className="sec relative overflow-hidden">
+      {/* BG radial blobs */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent-orange/[0.03] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-accent-blue/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="sec-inner">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-24"
+          className="flex items-center gap-6 mb-20"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6">
-            Milestones & Wins
-          </h2>
-          <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
-            Beyond code — moments that shaped who I am
-          </p>
+          <div className="sec-label">Milestones &amp; Wins</div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4 }}
+            className="line-h flex-1 origin-left"
+          />
+          <span className="font-mono text-[10px] text-zinc-800 tracking-widest">04 / 07</span>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-800 to-transparent" />
+        <motion.h2
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-[clamp(2.2rem,5vw,5.5rem)] font-extrabold tracking-tight leading-[1.05] mb-6"
+        >
+          Beyond the{" "}
+          <span className="grad-text">code</span>
+        </motion.h2>
 
-          {/* Achievement cards */}
-          <div className="space-y-16">
-            {achievements.map((achievement, index) => {
-              const isEven = index % 2 === 0;
-              
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-start gap-8 ${
-                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                >
-                  {/* Content card */}
-                  <div className="w-full md:w-[calc(50%-40px)]">
-                    <motion.div
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      className="glass-card p-8 cursor-pointer"
-                    >
-                      {/* Year badge */}
-                      <div className="inline-block px-4 py-1 rounded-full bg-blue-600/20 border border-blue-600/30 text-blue-400 text-sm font-medium mb-4">
-                        {achievement.year}
-                      </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-zinc-600 font-light max-w-lg mb-24"
+        >
+          Moments, achievements, and transformations that shaped who I am — on and off the keyboard.
+        </motion.p>
 
-                      {/* Title */}
-                      <h3 className="text-2xl font-semibold text-white mb-2">
-                        {achievement.title}
-                      </h3>
+        {/* Race track container */}
+        <div ref={trackRef} className="relative" style={{ minHeight: TRACK_HEIGHT }}>
+          {/* ── The track SVG ── */}
+          <TrackSVG totalHeight={TRACK_HEIGHT} />
 
-                      {/* Organization */}
-                      <p className="text-blue-400 font-medium mb-4">
-                        {achievement.organization}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-gray-400 leading-relaxed mb-6">
-                        {achievement.description}
-                      </p>
-
-                      {/* Stats */}
-                      <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-800">
-                        {Object.entries(achievement.stats).map(([key, value]) => (
-                          <div key={key} className="flex-1 min-w-[120px]">
-                            <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">
-                              {key}
-                            </div>
-                            <div className="text-sm font-medium text-gray-300">
-                              {value}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  {/* Center icon */}
-                  <div className="hidden md:flex w-20 h-20 rounded-full items-center justify-center relative z-10 shrink-0">
-                    <div className="absolute inset-0 rounded-full bg-blue-600/10 blur-xl" />
-                    <div className="relative w-full h-full rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-2xl">
-                      {/* Icon based on type */}
-                      {achievement.title.includes('GUJCET') && (
-                        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                        </svg>
-                      )}
-                      {achievement.title.includes('Trek') && (
-                        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                      )}
-                      {achievement.title.includes('Fitness') && (
-                        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      )}
-                      {achievement.title.includes('Art') && (
-                        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Spacer for alignment */}
-                  <div className="hidden md:block w-[calc(50%-40px)]" />
-                </motion.div>
-              );
-            })}
+          {/* ── The racing car ── */}
+          <div className="absolute left-1/2 -translate-x-1/2" style={{ top: 0, height: TRACK_HEIGHT, pointerEvents: "none" }}>
+            <RaceCar progress={carY} />
           </div>
+
+          {/* ── Start flag ── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="absolute left-1/2 -translate-x-1/2 -top-8 flex flex-col items-center gap-1"
+          >
+            <span className="font-mono text-[9px] text-accent-orange tracking-[0.3em] uppercase">START</span>
+            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-orange to-transparent" />
+          </motion.div>
+
+          {/* ── Milestone cards ── */}
+          <div
+            className="relative z-10 flex flex-col"
+            style={{ gap: `${CARD_HEIGHT - 120}px`, paddingTop: 40, paddingBottom: 40 }}
+          >
+            {milestones.map((item, i) => (
+              <MilestoneCard
+                key={item.title}
+                item={item}
+                index={i}
+                totalCards={milestones.length}
+              />
+            ))}
+          </div>
+
+          {/* ── Finish flag ── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="absolute left-1/2 -translate-x-1/2 -bottom-8 flex flex-col items-center gap-1"
+          >
+            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-accent-blue to-transparent" />
+            <span className="font-mono text-[9px] text-accent-blue tracking-[0.3em] uppercase">FINISH</span>
+          </motion.div>
         </div>
 
-        {/* Stats summary */}
+        {/* Summary stats */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          transition={{ delay: 0.2 }}
+          className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
-            { label: "GUJCET Percentile", value: "99.16%", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" },
-            { label: "Trek Altitude", value: "15K ft", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
-            { label: "Weight Lost", value: "27 kg", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
-            { label: "National Awards", value: "1", icon: "M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" }
-          ].map((stat, index) => (
+            { v: "99.16%", l: "GUJCET Percentile", a: "#ff6b35", e: "🏆" },
+            { v: "15K ft", l: "Trek Altitude", a: "#3d9cf5", e: "⛰️" },
+            { v: "27 kg", l: "Weight Lost", a: "#00d4ff", e: "💪" },
+            { v: "National", l: "Art Award Level", a: "#a855f7", e: "🎨" },
+          ].map((s, i) => (
             <motion.div
-              key={index}
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="glass-card p-6 text-center"
+              key={s.l}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="fut-card"
             >
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-600/20 flex items-center justify-center">
-                <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={stat.icon} />
-                </svg>
+              <div className="bracket bracket-tl" style={{ borderColor: `${s.a}60` }} />
+              <div className="bracket bracket-br" style={{ borderColor: `${s.a}60` }} />
+              <div className="h-[1px] w-full" style={{ background: `linear-gradient(90deg, ${s.a}60, transparent)` }} />
+              <div className="fut-card-inner text-center py-8">
+                <div className="text-3xl mb-3">{s.e}</div>
+                <p className="font-display text-2xl font-extrabold mb-1" style={{ color: s.a }}>{s.v}</p>
+                <p className="font-mono text-[10px] text-zinc-700 uppercase tracking-[0.2em]">{s.l}</p>
               </div>
-              <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
