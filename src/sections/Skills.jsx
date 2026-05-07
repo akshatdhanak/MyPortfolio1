@@ -101,10 +101,10 @@ function SkillBar({ name, level, i }) {
           className="absolute top-0 left-0 h-full"
           style={{
             background: level > 80
-              ? "linear-gradient(90deg, #ff6b35, #ff9a3c)"
+              ? "linear-gradient(90deg, var(--orange), var(--purple))"
               : level > 70
-              ? "linear-gradient(90deg, #3d9cf5, #00d4ff)"
-              : "linear-gradient(90deg, #a855f7, #3d9cf5)",
+              ? "linear-gradient(90deg, var(--blue), var(--cyan))"
+              : "linear-gradient(90deg, var(--purple), var(--blue))",
           }}
         />
         <motion.div
@@ -113,7 +113,7 @@ function SkillBar({ name, level, i }) {
           transition={{ delay: i * 0.05 + 0.2, duration: 0.8 }}
           className="absolute top-0 left-0 h-full blur-sm opacity-50"
           style={{
-            background: level > 80 ? "#ff6b35" : level > 70 ? "#3d9cf5" : "#a855f7",
+            background: level > 80 ? "var(--orange)" : level > 70 ? "var(--blue)" : "var(--purple)",
           }}
         />
       </div>
@@ -169,16 +169,16 @@ export default function Skills() {
                 onClick={() => setActive(i)}
                 className={`flex items-center gap-3 px-4 py-3 text-left transition-all duration-300 border ${
                   active === i
-                    ? "border-accent-orange/40 bg-accent-orange/[0.06] text-white"
+                    ? "border-[var(--orange)]/40 bg-[var(--orange)]/[0.06] text-white"
                     : "border-white/[0.04] bg-transparent text-zinc-600 hover:text-zinc-300 hover:border-white/10"
                 }`}
               >
-                <span className="font-mono text-[10px] w-6 text-accent-orange/60">{g.icon}</span>
+                <span className="font-mono text-[10px] w-6 text-[var(--orange)]/60">{g.icon}</span>
                 <span className="font-mono text-[11px] uppercase tracking-[0.1em]">{g.name}</span>
                 {active === i && (
                   <motion.div
                     layoutId="tab-indicator"
-                    className="ml-auto w-1 h-1 bg-accent-orange rounded-full"
+                    className="ml-auto w-1 h-1 bg-[var(--orange)] rounded-full"
                   />
                 )}
               </button>
@@ -225,7 +225,7 @@ export default function Skills() {
             {[...marqueeItems, ...marqueeItems].map((t, i) => (
               <span
                 key={i}
-                className="mx-10 text-4xl md:text-6xl font-display font-extrabold text-white/[0.02] hover:text-accent-orange/10 transition-colors duration-700 whitespace-nowrap select-none"
+                className="mx-10 text-4xl md:text-6xl font-display font-extrabold text-white/[0.02] hover:text-[var(--orange)]/10 transition-colors duration-700 whitespace-nowrap select-none"
               >
                 {t}
               </span>

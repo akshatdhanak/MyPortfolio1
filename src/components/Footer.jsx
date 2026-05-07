@@ -23,12 +23,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-8 h-8 border border-accent-orange/40 flex items-center justify-center">
+              <div className="relative w-8 h-8 border border-[var(--orange)]/40 flex items-center justify-center">
                 <div className="bracket bracket-tl" style={{ width: 5, height: 5 }} />
                 <div className="bracket bracket-br" style={{ width: 5, height: 5 }} />
                 <span className="font-display font-black text-sm text-white">A</span>
               </div>
-              <span className="font-display font-bold text-white text-sm">AKSHAT <span className="text-accent-orange">.D</span></span>
+              <span className="font-display font-bold text-white text-sm">AKSHAT <span className="text-[var(--orange)]">.D</span></span>
             </div>
             <p className="font-mono text-[11px] text-zinc-600 leading-relaxed">
               Full-Stack Developer &amp; AI/ML Engineer<br />
@@ -45,7 +45,7 @@ export default function Footer() {
             <p className="font-mono text-[9px] text-zinc-700 uppercase tracking-[0.25em] mb-5">Navigate</p>
             <div className="flex flex-col gap-2">
               {links.map((l) => (
-                <a key={l.label} href={l.href} className="font-mono text-xs text-zinc-600 hover:text-accent-orange transition-colors duration-300">
+                <a key={l.label} href={l.href} className="font-mono text-xs text-zinc-600 hover:text-[var(--orange)] transition-colors duration-300">
                   &gt; {l.label}
                 </a>
               ))}
@@ -57,7 +57,7 @@ export default function Footer() {
             <p className="font-mono text-[9px] text-zinc-700 uppercase tracking-[0.25em] mb-5">Connect</p>
             <div className="flex flex-col gap-2">
               {socials.map((l) => (
-                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-zinc-600 hover:text-accent-orange transition-colors duration-300">
+                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-zinc-600 hover:text-[var(--orange)] transition-colors duration-300">
                   &gt; {l.label}
                 </a>
               ))}

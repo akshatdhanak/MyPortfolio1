@@ -78,7 +78,7 @@ export default function About() {
             <div className="bracket bracket-tl" />
             <div className="bracket bracket-br" />
             <div className="fut-card-inner space-y-5">
-              <div className="font-mono text-[10px] text-accent-orange tracking-[0.2em] mb-6">// BIO.txt</div>
+              <div className="font-mono text-[10px] text-[var(--orange)] tracking-[0.2em] mb-6">// BIO.txt</div>
               <p className="text-zinc-300 leading-relaxed text-base">
                 I'm <span className="text-white font-semibold">Akshat Dhanak</span> — a final-year
                 Computer Engineering student at{" "}
@@ -113,7 +113,7 @@ export default function About() {
               <div className="bracket bracket-tl" />
               <div className="bracket bracket-tr" />
               <div className="fut-card-inner">
-                <div className="font-mono text-[10px] text-accent-blue tracking-[0.2em] mb-5">// STATUS.sys</div>
+                <div className="font-mono text-[10px] text-[var(--blue)] tracking-[0.2em] mb-5">// STATUS.sys</div>
                 <div className="space-y-3">
                   {[
                     { label: "Location", value: "Gujarat, India" },
@@ -123,7 +123,7 @@ export default function About() {
                   ].map((item) => (
                     <div key={item.label} className="flex items-center justify-between">
                       <span className="font-mono text-[10px] text-zinc-700 uppercase tracking-wider">{item.label}</span>
-                      <span className={`font-mono text-xs ${item.highlight ? "text-accent-orange" : "text-zinc-300"} flex items-center gap-2`}>
+                      <span className={`font-mono text-xs ${item.highlight ? "text-[var(--orange)]" : "text-zinc-300"} flex items-center gap-2`}>
                         {item.highlight && <span className="hud-dot" style={{ width: 5, height: 5 }} />}
                         {item.value}
                       </span>
@@ -143,7 +143,7 @@ export default function About() {
               <div className="bracket bracket-bl" />
               <div className="bracket bracket-br" />
               <div className="fut-card-inner">
-                <div className="font-mono text-[10px] text-accent-orange tracking-[0.2em] mb-4">// LINKS.json</div>
+                <div className="font-mono text-[10px] text-[var(--orange)] tracking-[0.2em] mb-4">// LINKS.json</div>
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     { label: "GitHub", url: "https://github.com/akshatdhanak" },
@@ -156,9 +156,9 @@ export default function About() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 font-mono text-[11px] text-zinc-500 hover:text-accent-orange transition-colors duration-300 group"
+                      className="flex items-center gap-2 font-mono text-[11px] text-zinc-500 hover:text-[var(--orange)] transition-colors duration-300 group"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="shrink-0 group-hover:text-accent-orange">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="shrink-0 group-hover:text-[var(--orange)]">
                         <path d="M2 8L8 2M8 2H3M8 2V7" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                       {link.label}
@@ -182,11 +182,14 @@ export default function About() {
             >
               <div className="bracket bracket-tl" />
               <div className="bracket bracket-br" />
-              <div className="fut-card-inner text-center py-10">
-                <p className="stat-num mb-2">
+              <div className="fut-card-inner text-center py-10 px-2 md:px-4 flex flex-col items-center justify-center">
+                <p 
+                  className="stat-num mb-2" 
+                  style={{ fontSize: s.v > 1000 ? 'clamp(1.8rem, 3.5vw, 3.2rem)' : undefined }}
+                >
                   <Counter target={s.v} suffix={s.s} />
                 </p>
-                <p className="font-mono text-[10px] text-zinc-600 uppercase tracking-[0.2em]">{s.l}</p>
+                <p className="font-mono text-[10px] text-[var(--muted, #666)] uppercase tracking-[0.2em] mt-auto">{s.l}</p>
               </div>
             </motion.div>
           ))}

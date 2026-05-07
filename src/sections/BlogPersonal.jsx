@@ -70,10 +70,10 @@ export default function Blog() {
   const regularPosts = filteredPosts.filter(post => !post.featured);
 
   return (
-    <section id="blog" className="sec bg-black relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-3xl" />
-      
-      <div className="sec-inner relative z-10">
+    <section id="blog" className="sec relative overflow-hidden">
+      <div className="sec-inner relative z-10 max-w-6xl mx-auto">
+        
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -81,14 +81,20 @@ export default function Blog() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6">
-            Thoughts & Ideas
+          <div className="inline-flex items-center gap-4 mb-6">
+            <span className="h-2 w-2 bg-[#e5ff00]"></span>
+            <span className="font-mono text-sm tracking-widest uppercase text-[#888888]">Journal</span>
+            <span className="h-2 w-2 bg-[#e5ff00]"></span>
+          </div>
+          <h2 className="font-display text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-6">
+            Thoughts &amp; <span className="text-[#e5ff00] drop-shadow-[4px_4px_0px_rgba(255,255,255,0.2)]">Ideas</span>
           </h2>
-          <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
+          <p className="font-body text-xl text-[#888888] font-medium max-w-2xl mx-auto">
             Raw thoughts on startups, code, and building things that matter
           </p>
         </motion.div>
 
+        {/* Categories */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,10 +106,10 @@ export default function Blog() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-2 rounded-none font-mono text-sm uppercase transition-all duration-300 border-2 ${
                 selectedCategory === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+                  ? 'bg-[#e5ff00] text-[#000000] border-[#e5ff00] shadow-[4px_4px_0px_#ffffff]'
+                  : 'bg-transparent text-[#888888] hover:text-white border-[rgba(255,255,255,0.2)] hover:border-[#e5ff00]'
               }`}
             >
               {category}
@@ -111,9 +117,10 @@ export default function Blog() {
           ))}
         </motion.div>
 
+        {/* Featured Posts */}
         {featuredPosts.length > 0 && (
           <div className="mb-20">
-            <h3 className="text-2xl font-semibold text-white mb-8">Featured</h3>
+            <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight mb-8">Featured</h3>
             <div className="grid md:grid-cols-2 gap-8">
               {featuredPosts.map((post, index) => (
                 <motion.article
@@ -122,29 +129,30 @@ export default function Blog() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="glass-card p-8 cursor-pointer group"
+                  className="fut-card group cursor-pointer"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-600/20 text-blue-400 border border-blue-600/30">
-                      {post.category}
-                    </span>
-                    <span className="text-sm text-gray-500">{post.readTime}</span>
-                  </div>
+                  <div className="fut-card-inner h-full flex flex-col">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="font-mono px-3 py-1 text-[10px] tracking-[0.2em] uppercase bg-[#e5ff00] text-[#000000] font-bold">
+                        {post.category}
+                      </span>
+                      <span className="font-mono text-xs text-[#888888]">{post.readTime}</span>
+                    </div>
 
-                  <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-gray-400 leading-relaxed mb-6">
-                    {post.excerpt}
-                  </p>
+                    <h3 className="font-display text-3xl font-bold text-white mb-4 group-hover:text-[#e5ff00] transition-colors leading-tight">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="font-body text-[#aaaaaa] leading-relaxed mb-8 flex-grow">
+                      {post.excerpt}
+                    </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-800">
-                    <span className="text-sm text-gray-500">{post.date}</span>
-                    <span className="text-blue-400 text-sm font-medium group-hover:translate-x-2 transition-transform">
-                      Read more →
-                    </span>
+                    <div className="flex items-center justify-between pt-6 border-t border-[rgba(255,255,255,0.1)] mt-auto">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#888888]">{post.date}</span>
+                      <span className="font-mono text-[#e5ff00] text-sm font-bold uppercase group-hover:translate-x-2 transition-transform">
+                        Read more →
+                      </span>
+                    </div>
                   </div>
                 </motion.article>
               ))}
@@ -152,42 +160,38 @@ export default function Blog() {
           </div>
         )}
 
+        {/* Regular Posts */}
         {regularPosts.length > 0 && (
           <div>
-            <h3 className="text-2xl font-semibold text-white mb-8">More Articles</h3>
+            <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight mb-8">More Articles</h3>
             <div className="grid md:grid-cols-3 gap-6">
               {regularPosts.map((post, index) => (
                 <motion.article
                   key={post.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.03, y: -5 }}
-                  className="glass-card p-6 cursor-pointer group"
+                  className="fut-card group cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  </div>
+                  <div className="fut-card-inner h-full flex flex-col p-6">
+                    <div className="flex items-center gap-3 mb-4 font-mono text-[10px] tracking-widest uppercase text-[#888888]">
+                      <span className="text-[#e5ff00] font-bold">{post.category}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
 
-                  <div className="flex items-center gap-3 mb-3 text-xs text-gray-500">
-                    <span>{post.category}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
+                    <h3 className="font-display text-xl font-bold text-white mb-3 group-hover:text-[#e5ff00] transition-colors leading-snug">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="font-body text-[#888888] text-sm leading-relaxed mb-6 flex-grow">
+                      {post.excerpt}
+                    </p>
 
-                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="pt-3 border-t border-gray-800">
-                    <span className="text-xs text-gray-600">{post.date}</span>
+                    <div className="pt-4 border-t border-[rgba(255,255,255,0.1)] mt-auto">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#888888]">{post.date}</span>
+                    </div>
                   </div>
                 </motion.article>
               ))}
@@ -195,43 +199,6 @@ export default function Blog() {
           </div>
         )}
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-24 glass-card p-12 text-center"
-        >
-          <h3 className="text-3xl font-semibold text-white mb-4">Stay in the Loop</h3>
-          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-            Raw thoughts on building, startups, and life. No fluff, just real talk.
-          </p>
-          
-          <div className="flex gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 px-6 py-4 rounded-full bg-white/5 border border-gray-700 focus:border-blue-600 outline-none text-white placeholder-gray-500 transition-all"
-            />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                const input = e.target.previousElementSibling;
-                if (input.value) {
-                  alert('Thanks for subscribing! 🎉');
-                  input.value = '';
-                }
-              }}
-              className="btn-primary"
-            >
-              Subscribe
-            </button>
-          </div>
-          
-          <p className="text-xs text-gray-600 mt-4">
-            Join the newsletter • Unsubscribe anytime
-          </p>
-        </motion.div>
       </div>
     </section>
   );

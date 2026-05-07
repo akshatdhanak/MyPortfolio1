@@ -8,7 +8,7 @@ const items = [
     company: "Sparks to Ideas",
     desc: "Developed ML models and data preprocessing pipelines. Deployed AI solutions using Python, TensorFlow, and scikit-learn on real-world datasets.",
     tags: ["Python", "TensorFlow", "scikit-learn", "Pandas", "Jupyter"],
-    accent: "#ff6b35",
+    accent: "var(--orange)",
     index: "01",
   },
   {
@@ -17,7 +17,7 @@ const items = [
     company: "Fuzzy Cloud",
     desc: "Built full-stack production features. REST API design, database architecture, and CI/CD workflows in a fast-paced startup environment.",
     tags: ["React", "Node.js", "MongoDB", "Express", "Git"],
-    accent: "#3d9cf5",
+    accent: "var(--blue)",
     index: "02",
   },
   {
@@ -26,7 +26,7 @@ const items = [
     company: "Dharmsinh Desai University",
     desc: "Final-year student (7th semester). Core coursework in DSA, OS, DBMS, Computer Networks, AI/ML, and Software Engineering.",
     tags: ["DSA", "DBMS", "OS", "AI/ML", "Networking"],
-    accent: "#a855f7",
+    accent: "var(--purple)",
     index: "03",
   },
 ];
@@ -111,7 +111,7 @@ export default function Experience() {
                       <div className="flex items-start gap-4">
                         <span className="font-mono text-[11px] text-zinc-700 pt-1">{item.index}</span>
                         <div>
-                          <h3 className="font-display text-lg md:text-xl font-bold text-white group-hover:text-accent-orange transition-colors duration-400">
+                          <h3 className="font-display text-lg md:text-xl font-bold text-white group-hover:text-[var(--orange)] transition-colors duration-400">
                             {item.role}
                           </h3>
                           <p className="font-mono text-sm font-semibold mt-0.5" style={{ color: item.accent }}>

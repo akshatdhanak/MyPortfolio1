@@ -72,12 +72,12 @@ export default function Contact() {
             <div className="bracket bracket-tr" />
             <div className="bracket bracket-bl" />
             <div className="bracket bracket-br" />
-            <div className="h-[1px] w-0 group-hover:w-full transition-all duration-700 bg-gradient-to-r from-accent-orange via-accent-blue to-transparent" />
+            <div className="h-[1px] w-0 group-hover:w-full transition-all duration-700 bg-gradient-to-r from-[var(--orange)] via-[var(--blue)] to-transparent" />
             <div className="fut-card-inner py-14 text-center">
               <p className="font-mono text-[10px] text-zinc-700 tracking-[0.3em] uppercase mb-6">// ESTABLISH CONNECTION</p>
               <a
                 href="mailto:akshatdhanak@gmail.com"
-                className="font-display text-2xl md:text-4xl font-bold text-white hover:text-accent-orange transition-colors duration-400"
+                className="font-display text-2xl md:text-4xl font-bold text-white hover:text-[var(--orange)] transition-colors duration-400"
               >
                 akshatdhanak@gmail.com
               </a>
@@ -87,7 +87,7 @@ export default function Contact() {
                   className="btn-outline text-sm"
                 >
                   {copied ? (
-                    <span className="text-accent-orange">✓ Copied</span>
+                    <span className="text-[var(--orange)]">✓ Copied</span>
                   ) : (
                     "Copy Email"
                   )}
@@ -122,11 +122,11 @@ export default function Contact() {
                 onMouseLeave={() => setHoveredSocial(null)}
                 className="fut-card group"
               >
-                <div className="bracket bracket-tl" style={{ borderColor: hoveredSocial === s.name ? "#ff6b35" : undefined }} />
-                <div className="bracket bracket-br" style={{ borderColor: hoveredSocial === s.name ? "#ff6b35" : undefined }} />
+                <div className="bracket bracket-tl" style={{ borderColor: hoveredSocial === s.name ? "var(--orange)" : undefined }} />
+                <div className="bracket bracket-br" style={{ borderColor: hoveredSocial === s.name ? "var(--orange)" : undefined }} />
                 <div className="fut-card-inner py-5 text-center">
                   <p className="font-mono text-[10px] text-zinc-700 uppercase tracking-widest mb-1">{s.name}</p>
-                  <p className="font-mono text-xs text-zinc-500 group-hover:text-accent-orange transition-colors duration-300">{s.handle}</p>
+                  <p className="font-mono text-xs text-zinc-500 group-hover:text-[var(--orange)] transition-colors duration-300">{s.handle}</p>
                 </div>
               </motion.a>
             ))}

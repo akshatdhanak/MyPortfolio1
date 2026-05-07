@@ -9,7 +9,7 @@ const projects = [
     desc: "Full-stack academic system with barcode attendance, AI database assistant, fee management, result generation. Dockerized with CI/CD pipeline.",
     tags: ["Django", "Python", "PostgreSQL", "Docker", "Gemini API", "CI/CD"],
     url: "https://github.com/akshatdhanak/EduNexus",
-    accent: "#ff6b35",
+    accent: "var(--orange)",
     featured: true,
     status: "DEPLOYED",
   },
@@ -20,7 +20,7 @@ const projects = [
     desc: "MERN-stack AI chatbot with persistent conversations, auth, and polished UI. Powered by Gemini API with real-time streaming responses.",
     tags: ["React", "Node.js", "MongoDB", "Express", "Gemini API"],
     url: "https://github.com/akshatdhanak/Aura-AI---not-just-a-chatbot",
-    accent: "#3d9cf5",
+    accent: "var(--blue)",
     status: "LIVE",
   },
   {
@@ -30,7 +30,7 @@ const projects = [
     desc: "ML-powered tool that scans ingredients to detect allergens, harmful additives, and dietary risk scores using advanced NLP models.",
     tags: ["Python", "scikit-learn", "Flask", "React", "ML Pipeline"],
     url: "https://github.com/akshatdhanak",
-    accent: "#00d4ff",
+    accent: "var(--cyan)",
     status: "BETA",
   },
   {
@@ -40,7 +40,7 @@ const projects = [
     desc: "Interactive narrative platform with AI-driven story generation, character customization, and branching storylines built on .NET.",
     tags: ["C#", ".NET", "ASP.NET Core", "Entity Framework", "SQL Server"],
     url: "https://github.com/akshatdhanak",
-    accent: "#a855f7",
+    accent: "var(--purple)",
     status: "WIP",
   },
   {
@@ -50,7 +50,7 @@ const projects = [
     desc: "Real-time computer vision platform with object detection, facial recognition, live metrics, and model monitoring dashboard.",
     tags: ["Spring Boot", "TensorFlow", "React", "PostgreSQL", "Docker"],
     url: "https://github.com/akshatdhanak",
-    accent: "#ff9a3c",
+    accent: "var(--orange)",
     status: "WIP",
   },
 ];
@@ -131,7 +131,7 @@ function ProjectCard({ p, i, inView }) {
                 className="font-display text-xl md:text-2xl font-bold text-white group-hover:transition-colors duration-300"
                 style={{ "--hover-color": p.accent }}
               >
-                <span className="group-hover:text-accent-orange transition-colors duration-400">{p.title}</span>
+                <span className="group-hover:text-[var(--orange)] transition-colors duration-400">{p.title}</span>
               </h3>
               <p className="font-mono text-[11px] text-zinc-600 mt-1">{p.sub}</p>
             </div>
@@ -141,7 +141,7 @@ function ProjectCard({ p, i, inView }) {
               transition={{ type: "spring", stiffness: 300 }}
               className="ml-4 shrink-0 mt-2"
             >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-zinc-700 group-hover:text-accent-orange transition-colors duration-300">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-zinc-700 group-hover:text-[var(--orange)] transition-colors duration-300">
                 <path d="M4 14L14 4M14 4H6M14 4V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.div>
