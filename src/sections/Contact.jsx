@@ -132,14 +132,21 @@ export default function Contact() {
             ))}
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 0.3 } : {}}
+            animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 1 }}
-            className="font-mono text-[10px] text-zinc-700 text-center mt-12 tracking-[0.3em] uppercase"
+            className="text-center mt-12"
           >
-            Resume available on request
-          </motion.p>
+            <a 
+              href="https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] text-zinc-500 hover:text-[var(--orange)] transition-colors tracking-[0.3em] uppercase underline decoration-zinc-800 underline-offset-4"
+            >
+              View Full Résumé
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

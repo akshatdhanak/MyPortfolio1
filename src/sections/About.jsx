@@ -149,7 +149,7 @@ export default function About() {
                     { label: "GitHub", url: "https://github.com/akshatdhanak" },
                     { label: "LinkedIn", url: "https://www.linkedin.com/in/akshat-soni-b984bb283/" },
                     { label: "LeetCode", url: "https://leetcode.com/u/Akshat_Dhanak/" },
-                    { label: "Resume", url: "#" },
+                    { label: "Resume", url: "https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link" },
                   ].map((link) => (
                     <a
                       key={link.label}

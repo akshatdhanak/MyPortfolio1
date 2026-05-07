@@ -148,7 +148,7 @@ export const socialLinks = {
   linkedin: "https://linkedin.com/in/yourusername",
   twitter: "https://twitter.com/yourusername",
   email: "your.email@example.com",
-  resume: "/resume.pdf"
+  resume: "https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link"
 };
 
 // Site Metadata
