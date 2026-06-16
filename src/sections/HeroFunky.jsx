@@ -34,7 +34,7 @@ export default function HeroFunky() {
           transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
           className="inline-block mb-8 bg-[#e5ff00] text-[#050505] px-6 py-2 border-2 border-black shadow-[4px_4px_0px_rgba(255,255,255,0.2)]"
         >
-          <span className="text-sm font-body font-bold tracking-[0.2em] uppercase">Full Stack &amp; AI Engineer</span>
+          <span className="text-sm font-body font-bold tracking-[0.2em] uppercase">Full-Stack Engineer &amp; Data Scientist</span>
         </motion.div>
 
         <motion.h1 
@@ -53,7 +53,7 @@ export default function HeroFunky() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-lg md:text-2xl font-body font-medium mb-12 max-w-2xl mx-auto leading-relaxed text-[#888888]"
         >
-          I build high-impact digital experiences. <span className="text-white">Zero fluff.</span> Pure performance. <span className="text-[#e5ff00] underline decoration-2 underline-offset-4">Hardcore engineering.</span>
+          Building production-grade full-stack applications &amp; AI/ML systems. <span className="text-white">Data Science.</span> Scalable architecture. <span className="text-[#e5ff00] underline decoration-2 underline-offset-4">Intelligent engineering.</span>
         </motion.p>
 
         <motion.div 

@@ -31,8 +31,8 @@ export default function Footer() {
               <span className="font-display font-bold text-white text-sm">AKSHAT <span className="text-[var(--orange)]">.D</span></span>
             </div>
             <p className="font-mono text-[11px] text-zinc-600 leading-relaxed">
-              Full-Stack Developer &amp; AI/ML Engineer<br />
-              Building intelligent software.
+              Full-Stack Engineer &amp; Data Scientist<br />
+              Building intelligent systems.
             </p>
             <div className="flex items-center gap-2 mt-4">
               <span className="hud-dot" />

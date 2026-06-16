@@ -6,13 +6,13 @@ const groups = [
     name: "Languages",
     icon: "< />",
     items: [
-      { name: "Python", level: 90 },
+      { name: "Python", level: 92 },
+      { name: "TypeScript", level: 85 },
       { name: "JavaScript", level: 88 },
-      { name: "TypeScript", level: 75 },
-      { name: "Java", level: 72 },
-      { name: "C/C++", level: 65 },
+      { name: "Java", level: 75 },
+      { name: "C/C++", level: 70 },
       { name: "C#", level: 68 },
-      { name: "SQL", level: 80 },
+      { name: "SQL", level: 82 },
     ],
   },
   {
@@ -20,11 +20,9 @@ const groups = [
     icon: "{ }",
     items: [
       { name: "React", level: 90 },
-      { name: "Next.js", level: 78 },
+      { name: "Next.js", level: 85 },
       { name: "Tailwind CSS", level: 92 },
-      { name: "Framer Motion", level: 80 },
-      { name: "Angular", level: 65 },
-      { name: "Vue.js", level: 60 },
+      { name: "Framer Motion", level: 78 },
     ],
   },
   {
@@ -34,49 +32,45 @@ const groups = [
       { name: "Node.js", level: 85 },
       { name: "Express", level: 88 },
       { name: "Django", level: 82 },
-      { name: "Spring Boot", level: 70 },
-      { name: "ASP.NET Core", level: 68 },
-      { name: "REST APIs", level: 90 },
+      { name: "Flask", level: 75 },
+      { name: "Spring Boot", level: 72 },
+      { name: "Hibernate", level: 70 },
+      { name: ".NET Core", level: 68 },
     ],
   },
   {
     name: "AI / ML",
     icon: "~>",
     items: [
-      { name: "TensorFlow", level: 80 },
-      { name: "PyTorch", level: 72 },
+      { name: "TensorFlow", level: 82 },
+      { name: "PyTorch", level: 75 },
       { name: "scikit-learn", level: 85 },
       { name: "Pandas", level: 90 },
-      { name: "NumPy", level: 88 },
-      { name: "OpenCV", level: 70 },
+      { name: "OpenAI API", level: 85 },
+      { name: "Gemini API", level: 82 },
     ],
   },
   {
     name: "Databases",
     icon: "##",
     items: [
-      { name: "MongoDB", level: 85 },
-      { name: "PostgreSQL", level: 80 },
-      { name: "MySQL", level: 78 },
-      { name: "SQLite", level: 85 },
-      { name: "Firebase", level: 72 },
+      { name: "PostgreSQL", level: 85 },
+      { name: "MongoDB", level: 82 },
+      { name: "SQL Server", level: 72 },
     ],
   },
   {
     name: "DevOps",
     icon: ">>",
     items: [
-      { name: "Docker", level: 78 },
       { name: "Git", level: 92 },
-      { name: "CI/CD", level: 75 },
-      { name: "Linux", level: 80 },
-      { name: "GitHub Actions", level: 72 },
-      { name: "Vercel", level: 88 },
+      { name: "Docker", level: 80 },
+      { name: "CI/CD", level: 78 },
     ],
   },
 ];
 
-const marqueeItems = ["React", "Python", "TensorFlow", "Node.js", "Docker", "Django", "MongoDB", "TypeScript", "PostgreSQL", "Spring Boot", "Next.js", "Tailwind", "PyTorch", "Git", "Vercel", "Express"];
+const marqueeItems = ["Python", "TypeScript", "React", "Next.js", "Node.js", "Django", "Spring Boot", "PostgreSQL", "TensorFlow", "PyTorch", "scikit-learn", "Docker", "Git", "Express", "Supabase", "Java"];
 
 function SkillBar({ name, level, i }) {
   const ref = useRef(null);

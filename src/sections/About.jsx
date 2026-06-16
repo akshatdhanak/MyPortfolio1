@@ -81,21 +81,21 @@ export default function About() {
               <div className="font-mono text-[10px] text-[var(--orange)] tracking-[0.2em] mb-6">// BIO.txt</div>
               <p className="text-zinc-300 leading-relaxed text-base">
                 I'm <span className="text-white font-semibold">Akshat Dhanak</span> — a final-year
-                Computer Engineering student at{" "}
+                Computer Engineering student and Data Science enthusiast at{" "}
                 <span className="text-white font-semibold">Dharmsinh Desai University</span> (Class of 2027).
-                From building MERN-stack applications to training TensorFlow models,
-                I work across the entire spectrum of modern software.
+                I build production-grade full-stack applications and AI/ML systems
+                — from designing scalable REST APIs to training machine learning models.
               </p>
               <p className="text-zinc-500 leading-relaxed">
-                I've interned at{" "}
-                <span className="text-zinc-200 font-medium">Fuzzy Cloud</span> as an SDE and at{" "}
-                <span className="text-zinc-200 font-medium">Sparks to Ideas</span> as an AI/ML Intern
-                — shipping production features, designing architectures, and solving real problems with data.
+                I interned at{" "}
+                <span className="text-zinc-200 font-medium">Fuzzy Cloud</span> as a Software Engineering Intern
+                — leading backend architecture, building real-time communication layers,
+                and collaborating on a large-scale TypeScript codebase.
               </p>
               <div className="pt-5 border-t border-white/[0.04]">
                 <p className="text-zinc-500 leading-relaxed">
-                  Currently deep into data science, neural networks, and MLOps.
-                  Actively seeking roles where I can build intelligent systems that make a real-world impact.
+                  Passionate about DBMS, engineering intelligent systems, and crafting polished,
+                  user-centric experiences. Open to roles in AI/ML, Data Science, and Full-Stack Development.
                 </p>
               </div>
             </div>

@@ -144,19 +144,19 @@ export const projects = [
 
 // Social Links
 export const socialLinks = {
-  github: "https://github.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
-  twitter: "https://twitter.com/yourusername",
-  email: "your.email@example.com",
+  github: "https://github.com/akshatdhanak",
+  linkedin: "https://www.linkedin.com/in/akshat-soni-b984bb283/",
+  twitter: "https://twitter.com/akshatdhanak",
+  email: "akshatdhanak@gmail.com",
   resume: "https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link"
 };
 
 // Site Metadata
 export const siteMetadata = {
-  title: "Akshat Dhanak - Full-Stack Developer & AI Engineer",
-  description: "Portfolio of Akshat Dhanak - Building innovative web applications and AI-powered solutions",
-  keywords: ["Full-Stack Developer", "AI Engineer", "React", "Next.js", "Machine Learning"],
+  title: "Akshat Dhanak - Full-Stack Engineer & Data Scientist",
+  description: "Portfolio of Akshat Dhanak - Building production-grade full-stack applications and AI/ML systems",
+  keywords: ["Full-Stack Engineer", "Data Scientist", "React", "Next.js", "Machine Learning", "Python"],
   author: "Akshat Dhanak",
-  siteUrl: "https://yourwebsite.com",
+  siteUrl: "https://my-portfolio1-cyan.vercel.app",
   image: "/og-image.jpg"
 };

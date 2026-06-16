@@ -1,66 +1,67 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-// SVG Icons instead of emojis
-const MountainIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
-    <path d="M8 3l4 8 5-5 5 15H2L8 3z" />
-  </svg>
-);
-
-const GymIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
-    <path d="M18 4h3v16h-3M3 4h3v16H3m3-8h12" />
-  </svg>
-);
-
+// SVG Icons
 const TrophyIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
     <path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 01-10 0V4zM4 4h3v4H4zM17 4h3v4h-3z" />
   </svg>
 );
 
-const ArtIcon = () => (
+const CertIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
-    <path d="M12 19l7-7 3 3-7 7-3-3z" />
-    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-    <path d="M2 2l7.586 7.586" />
-    <circle cx="11" cy="11" r="2" />
+    <circle cx="12" cy="8" r="6" />
+    <path d="M15.5 12.5L19 21l-7-3-7 3 3.5-8.5" />
+  </svg>
+);
+
+const CodeIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const GlobeIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
   </svg>
 );
 
 const milestones = [
   {
-    year: "2015",
-    title: "National Art Award",
-    org: "National Level Competition",
-    desc: "Won a national-level art award in 5th standard. Recognized for creativity and artistic excellence among participants from across the country.",
-    stats: [{ k: "Level", v: "National" }, { k: "Grade", v: "5th Std" }, { k: "Category", v: "Art" }],
-    icon: <ArtIcon />,
+    year: "2025",
+    title: "DUHacks 5.0 Finalist",
+    org: "Hackathon Competition",
+    desc: "Selected in Top 10 out of 100+ teams at DUHacks 5.0 — a highly competitive hackathon featuring innovative projects from across the country.",
+    stats: [{ k: "Ranking", v: "Top 10" }, { k: "Teams", v: "100+" }, { k: "Type", v: "Hackathon" }],
+    icon: <TrophyIcon />,
   },
   {
     year: "2023",
     title: "GUJCET Excellence",
     org: "Gujarat Common Entrance Test",
-    desc: "Secured 107/120 marks with a perfect 40/40 in Mathematics. Achieved 99.16 percentile — top of the state.",
+    desc: "Secured 107/120 marks with a perfect 40/40 in Mathematics. Achieved 99.16 percentile among all test-takers in the state.",
     stats: [{ k: "Score", v: "107/120" }, { k: "Percentile", v: "99.16%" }, { k: "Maths", v: "40/40" }],
-    icon: <TrophyIcon />,
+    icon: <CodeIcon />,
   },
   {
-    year: "2024",
-    title: "Bhrigu Lake Trek",
-    org: "First Himalayan Trek",
-    desc: "Completed my first-ever trek to Bhrigu Lake at 15,000 feet altitude in the Himalayas. Conquered challenging terrain and extreme weather.",
-    stats: [{ k: "Altitude", v: "15,000 ft" }, { k: "Difficulty", v: "High" }, { k: "Experience", v: "First Trek" }],
-    icon: <MountainIcon />,
+    year: "2023",
+    title: "Data Science Certification",
+    org: "Code with Harry",
+    desc: "Completed a comprehensive Data Science course certification covering Python, machine learning, data analysis, and visualization techniques.",
+    stats: [{ k: "Field", v: "Data Science" }, { k: "Provider", v: "Code with Harry" }, { k: "Status", v: "Certified" }],
+    icon: <CertIcon />,
   },
   {
-    year: "2024–25",
-    title: "Fitness Transformation",
-    org: "Personal Achievement",
-    desc: "Lost 27 kg through consistent diet management and gym training. Transformed lifestyle with discipline and dedication over 12+ months.",
-    stats: [{ k: "Lost", v: "27 kg" }, { k: "Method", v: "Diet + Gym" }, { k: "Duration", v: "12+ months" }],
-    icon: <GymIcon />,
+    year: "Present",
+    title: "Languages",
+    org: "Communication",
+    desc: "Multilingual communicator fluent in English (Professional), Hindi (Native), and Gujarati (Native) — enabling effective collaboration across diverse teams and stakeholders.",
+    stats: [{ k: "English", v: "Professional" }, { k: "Hindi", v: "Native" }, { k: "Gujarati", v: "Native" }],
+    icon: <GlobeIcon />,
   },
 ];
 
