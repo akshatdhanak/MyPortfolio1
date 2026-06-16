@@ -139,7 +139,7 @@ export default function Contact() {
             className="text-center mt-12"
           >
             <a 
-              href="https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link" 
+              href="https://drive.google.com/drive/folders/1-bkKpD0sEu-syEkqlysamzv4iiPPJ-6u" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-mono text-[10px] text-zinc-500 hover:text-[var(--orange)] transition-colors tracking-[0.3em] uppercase underline decoration-zinc-800 underline-offset-4"

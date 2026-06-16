@@ -148,7 +148,7 @@ export const socialLinks = {
   linkedin: "https://www.linkedin.com/in/akshat-soni-b984bb283/",
   twitter: "https://twitter.com/akshatdhanak",
   email: "akshatdhanak@gmail.com",
-  resume: "https://drive.google.com/file/d/1kydr-qtTHF_EWJci0GesqMw7tZCMu2D9/view?usp=share_link"
+  resume: "https://drive.google.com/drive/folders/1-bkKpD0sEu-syEkqlysamzv4iiPPJ-6u"
 };
 
 // Site Metadata
